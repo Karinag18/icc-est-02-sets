@@ -1,59 +1,45 @@
+import collections.Sets;
 import java.util.Set;
+import java.util.TreeSet;
+import models.Contacto;
+import utils.ContactoComparator;
 
 public class App {
-    public static void main(String[] args) {
-        runHashSet();
-        runLinkedHashSet();
-        runTreeSet();
-        runTreeSetConComparador();
+    public static void main(String[] args) throws Exception {
+        System.out.println("----------------SETS----------------");
+        //runHashSet();
+        //runLinkedHashSet();
+        //runTreeSet();
+       // runConstruirTreeSetConComparador();
+        //runEjercicio();
+        runEjercicio2();
     }
+    private static void runEjercicio() {
+        Set<Contacto> agenda = new TreeSet<>(new ContactoComparator());
+        Contacto c1 = new Contacto("pedro", "lopez", "123456789");
+        Contacto c2 = new Contacto("pedro", "lopez", "123456789");
 
-    public static void runHashSet() {
-        Sets sets = new Sets(); 
-        Set<String> ejemploHashSet = sets.construirHashSet(); 
+        System.out.println("Referencia en memoria: ");
+        Boolean comparacionReferencia = c1 == c2;
+        System.out.println("c1: " + c1 + " == c2: " + c2 + " = " + comparacionReferencia + "\n *******************************");
 
-        System.out.println("------HashSet------");
-        System.out.println("Elementos del HashSet (no se garantiza orden):");
+        System.out.println("Comparacion con equals:");
+        boolean comparacionEquals = c1.equals(c2); // Ahora la comparación es con equals()
+        System.out.println("c1: " + c1 + " == c2: " + c2 + " = " + comparacionEquals + "\n *******************************");
 
-        for (String elemento : ejemploHashSet) {
-            System.out.println(elemento);
+        System.out.println("comparacion con HashCode: ");
+        boolean comparacionHashcode = c1.hashCode() == c2.hashCode();
+        System.out.println("c1: " + c1.hashCode() + " == c2: " + c2.hashCode() + " = " + comparacionHashcode + "\n *******************************");
+    }
+    private static void runEjercicio2(){
+        Set<Contacto> agenda = new TreeSet<>(new ContactoComparator());
+        agenda.add(new Contacto("pedro", "lopez", "22222222222"));
+        agenda.add(new Contacto("luis", "perez", "11111111111"));
+        agenda.add(new Contacto("ana", "perez", "9874561230"));
+        agenda.add(new Contacto("pedro", "lopez", "0123456789"));
+
+        for (Contacto c: agenda) {
+            System.out.println(c);  
         }
     }
-
-    public static void runLinkedHashSet() {
-        Sets sets = new Sets(); 
-        Set<String> ejemploLinkedHashSet = sets.construirLinkedHashSet();
-
-        System.out.println("------LinkedHashSet------");
-        System.out.println("Elementos del LinkedHashSet (mantiene el orden de inserción):");
-
-        for (String elemento : ejemploLinkedHashSet) {
-            System.out.println(elemento);
-        }
-    }
-
-    public static void runTreeSet() {
-        Sets sets = new Sets(); 
-        Set<String> ejemploTreeSet = sets.construirTreeSet();
-
-        System.out.println("------TreeSet------");
-        System.out.println("Elementos del TreeSet (ordenados naturalmente):");
-
-        for (String elemento : ejemploTreeSet) {
-            System.out.println(elemento);
-        }
-    }
-
-    public static void runTreeSetConComparador() {
-        Sets sets = new Sets(); // Crear una instancia de la clase Sets
-        Set<String> ejemploTreeSetConComparador = sets.construirTreeSetConComparador(); // Llamar al método
-    
-        System.out.println("------TreeSet con Comparador------");
-        System.out.println("Elementos del TreeSet (ordenados por longitud y luego alfabéticamente):");
-    
-        for (String elemento : ejemploTreeSetConComparador) {
-            System.out.println(elemento);
-        }
-    }
-    
 }
